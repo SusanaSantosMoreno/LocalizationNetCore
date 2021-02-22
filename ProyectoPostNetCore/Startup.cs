@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using LazZiya.ExpressLocalization;
 using XLocalizer.Routing;
 using XLocalizer.Xml;
 using XLocalizer;
