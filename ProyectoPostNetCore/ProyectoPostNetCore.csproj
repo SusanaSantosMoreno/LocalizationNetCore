@@ -5,9 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Views.Home.Index.es.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
+    <PackageReference Include="LazZiya.ExpressLocalization" Version="4.0.4" />
+    <PackageReference Include="LazZiya.TagHelpers" Version="5.0.0" />
+    <PackageReference Include="XLocalizer" Version="1.0.2" />
+    <PackageReference Include="XLocalizer.TagHelpers" Version="1.0.0" />
+    <PackageReference Include="XLocalizer.Translate" Version="1.0.0" />
+    <PackageReference Include="XLocalizer.Translate.MyMemoryTranslate" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

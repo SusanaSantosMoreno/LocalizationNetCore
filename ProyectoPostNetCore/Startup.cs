@@ -13,6 +13,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using LazZiya.ExpressLocalization;
+using XLocalizer.Routing;
+using XLocalizer.Xml;
+using XLocalizer;
+using XLocalizer.Translate;
+using XLocalizer.Translate.MyMemoryTranslate;
 
 namespace ProyectoPostNetCore {
     public class Startup {
@@ -22,11 +28,9 @@ namespace ProyectoPostNetCore {
         }
 
         public void ConfigureServices (IServiceCollection services) {
-            services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc()
-               .AddViewLocalization(
-                   LanguageViewLocationExpanderFormat.Suffix,
-                   opts => { opts.ResourcesPath = "Resources"; })
+               .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                .AddDataAnnotationsLocalization();
             services.Configure<RequestLocalizationOptions>(options => {
                 var suportedCultures = new List<CultureInfo> {
@@ -38,7 +42,11 @@ namespace ProyectoPostNetCore {
                 options.DefaultRequestCulture = new RequestCulture("en-US");
                 options.SupportedCultures = suportedCultures;
                 options.SupportedUICultures = suportedCultures;
+                options.RequestCultureProviders.Insert(0,
+                    new RouteSegmentRequestCultureProvider(suportedCultures));
             });
+            services.AddSingleton<IXResourceProvider, XmlResourceProvider>();
+
             services.AddControllersWithViews(options => options.EnableEndpointRouting = false).
                 AddSessionStateTempDataProvider();
         }
@@ -56,12 +64,14 @@ namespace ProyectoPostNetCore {
 
             app.UseRouting();
 
-
-            app.UseRequestLocalization(app.ApplicationServices.
-                GetService<IOptions<RequestLocalizationOptions>>().Value);
+            //LOCALIZATION
+            var supportedCultures = new[] { "en-US", "es-ES", "es" };
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+                    .AddSupportedCultures(supportedCultures)
+                    .AddSupportedUICultures(supportedCultures);
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseAuthorization();
-
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
