@@ -13,11 +13,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using XLocalizer.Routing;
-using XLocalizer.Xml;
-using XLocalizer;
-using XLocalizer.Translate;
-using XLocalizer.Translate.MyMemoryTranslate;
 
 namespace ProyectoPostNetCore {
     public class Startup {
@@ -41,11 +36,7 @@ namespace ProyectoPostNetCore {
                 options.DefaultRequestCulture = new RequestCulture("en-US");
                 options.SupportedCultures = suportedCultures;
                 options.SupportedUICultures = suportedCultures;
-                options.RequestCultureProviders.Insert(0,
-                    new RouteSegmentRequestCultureProvider(suportedCultures));
             });
-            services.AddSingleton<IXResourceProvider, XmlResourceProvider>();
-
             services.AddControllersWithViews(options => options.EnableEndpointRouting = false).
                 AddSessionStateTempDataProvider();
         }
