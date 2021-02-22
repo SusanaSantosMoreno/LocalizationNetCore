@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,9 +19,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">
                             <span class="flag-icon flag-icon-es"></span>Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
                     </li>
                 </ul>
                 <div class="ms-auto">
@@ -50,6 +47,21 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
         $(document).ready(function () {
+
+            var culture = window.location.href.split("?").length > 1 ? window.location.href.split("?")[1] : "";
+            console.log(culture);
+            if (culture != "") {
+                var lang = culture.split("=")[1];
+                console.log(lang);
+                if (lang == "es-ES") {
+                    console.log("es");
+                    $("#langSelect").val("ES");
+                } else {
+                    console.log("en");
+                    $("#langSelect").val("EN");
+                }
+            }
+
             $("#langSelect").change(function () {
                 var redirect = $("#langSelect").val() == "ES" ? "?culture=es-ES" : "?culture=en-US";
                 window.location.href = redirect;
@@ -59,3 +71,4 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
