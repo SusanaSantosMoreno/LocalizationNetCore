@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using ProyectoPostNetCore.Models;
@@ -19,7 +19,7 @@ namespace ProyectoPostNetCore.Controllers {
         }
 
         public IActionResult Index () {
-            ViewData["Saludo"] = this._localizer["saludo"];
+            ViewData["despedida"] = this._localizer["despedida"];
             return View();
         }
 
