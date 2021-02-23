@@ -1,9 +1,11 @@
-﻿
+
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = Localizer["saludoCompleto", "Susana"];
+    ViewData["Title"] = Localizer["saludoCompleto", "Maria"];
 }
-<div class="text-center">
+<div class="text-center mt-5">
     <h1 class="display-4">@ViewData["Title"]</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <h1 class="display-4">@ViewData["despedida"]</h1>
 </div>
+
